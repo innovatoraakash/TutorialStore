@@ -81,7 +81,8 @@ export default {
         id: this.currentTutorial.id,
         title: this.currentTutorial.title,
         description: this.currentTutorial.description,
-        published: status
+        published: status,
+        File:this.currentTutorial.content
       };
 
       TutorialDataService.update(this.currentTutorial.id, data)

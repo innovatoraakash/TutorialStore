@@ -9,7 +9,20 @@
         <li class="nav-item">
           <router-link to="/add" class="nav-link">Add</router-link>
         </li>
-      </div>
+       
+        <div v-if="haveId">
+         <li  class="nav-item">
+          <router-link  to="/login" class="nav-link">sign in</router-link>
+        </li>
+        </div>
+        <div v-else>
+        <li  class="nav-item">
+          <router-link to="/signup" class="nav-link">signup</router-link>
+        </li>
+        </div>
+  
+  </div>
+     
     </nav>
 
     <div class="container mt-3">
@@ -20,6 +33,12 @@
 
 <script>
 export default {
-  description: "app"
+  description: "app",
+  data() {
+    return {
+      userId:null,
+      haveId: false,
+    }
+  },
 };
 </script>

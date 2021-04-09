@@ -42,6 +42,9 @@
         <div>
           <label><strong>Status:</strong></label> {{ currentTutorial.published ? "Published" : "Pending" }}
         </div>
+         <div>
+          <label><strong>File:</strong></label> {{ currentTutorial.content }}
+        </div>
 
         <router-link :to="'/tutorials/' + currentTutorial.id" class="badge badge-warning">Edit</router-link>
       </div>

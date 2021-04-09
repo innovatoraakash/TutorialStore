@@ -1,5 +1,6 @@
 <template>
   <div class="submit-form">
+  <div>${user}</div>
     <div v-if="!submitted">
       <div class="form-group">
         <label for="title">Title</label>
@@ -23,6 +24,17 @@
           description="description"
         />
       </div>
+       <div class="form-group">
+        <label for="file">file</label>
+        <input
+        type="file"
+          class="form-control file-input"
+          id="file"
+          required
+          @change="fileUploaded"
+         
+        />
+      </div>
 
       <button @click="saveTutorial" class="btn btn-success">Submit</button>
     </div>
@@ -36,6 +48,7 @@
 
 <script>
 import TutorialDataService from "../services/TutorialDataService";
+var user = localStorage.getItem('User');
 
 export default {
   description: "add-tutorial",
@@ -45,16 +58,21 @@ export default {
         id: null,
         title: "",
         description: "",
-        published: false
+        content:null,
+        published: false,
+        author : user.name
       },
       submitted: false
     };
   },
   methods: {
     saveTutorial() {
+      console.log(user);
       var data = {
         title: this.tutorial.title,
-        description: this.tutorial.description
+        description: this.tutorial.description,
+        content: this.tutorial.content
+        
       };
 
       TutorialDataService.create(data)
@@ -67,7 +85,11 @@ export default {
           console.log(e);
         });
     },
-    
+    fileUploaded(event){
+      this.tutorial.content= event.target.files[0];
+      console.log(this.tutorial.content)
+    }
+    ,
     newTutorial() {
       this.submitted = false;
       this.tutorial = {};
